@@ -17,7 +17,7 @@ const WeatherReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        weather: action.payload.data.results,
+        weather: action.payload.data.query.results.channel,
       };
     case WEATHER.REQUEST_FAIL:
       console.log(action.payload);

@@ -97,7 +97,6 @@ Cities.navigationOptions = {
 
 const mapStateToProps = (state) => {
   const { loading, error, cities } = state.cities;
-
   return {
     loading,
     error,

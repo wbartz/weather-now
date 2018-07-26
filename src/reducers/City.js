@@ -14,7 +14,7 @@ const CityReducer = (state = initialState, action) => {
         loading: true,
       };
     case CITY.REQUEST_SUCCESS:
-      if (action.payload.data.query.results.place.length === 1) {
+      if ('woeid' in action.payload.data.query.results.place) {
         return {
           ...state,
           loading: false,

@@ -1,12 +1,14 @@
 import { WEATHER } from '../types';
-import { WEATHER_URL } from '../env';
+import { CITY_URL } from '../env';
 
-function getWeather(woeid = 455823, format = 'json') {
+function getWeather(woeid = 455823) {
+  const query = `select * from weather.forecast where woeid = '${woeid}'`;
+
   return {
     type: WEATHER.REQUEST,
     payload: {
       request: {
-        url: `${WEATHER_URL}weather/?format=${format}&woeid=${woeid}`,
+        url: `${CITY_URL}&q=${encodeURI(query)}`,
       },
     },
   };

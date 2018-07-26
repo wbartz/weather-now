@@ -21,6 +21,7 @@ import Loading from '../components/Loading';
 import NoContent from '../components/NoContent';
 import { GetWeather } from '../actions';
 import Image from '../components/Image';
+import { CONDITION } from '../types';
 
 class Weather extends React.Component {
   componentDidMount() {
@@ -41,33 +42,46 @@ class Weather extends React.Component {
       .catch(() => navigation.navigate('City'));
   }
 
+  temperature = temp => parseInt((temp - 32) / 1.8);
+
+  velocity = vel => parseFloat(vel * 1.609344).toFixed(2);
+
+  date = (data) => {
+    const date = new Date(data);
+
+    const day = date.getDate();
+    const month = `${'0'.repeat(1)}${String(date.getMonth() + 1)}`;
+    const year = date.getFullYear();
+
+    const newDate = `${day}/${month}/${year}`;
+
+    return newDate;
+  }
+
   render() {
     const { weather, loading, navigation } = this.props;
+    console.log(weather);
     if (loading) return <Loading />;
-
-    if (weather.forecast.length === 0) return <NoContent navigation={navigation} />;
 
     return (
       <View style={{ flex: 1 }}>
-        <CustomHeader title={weather.city_name} navigation={navigation} />
+        <CustomHeader title={weather.location.city} navigation={navigation} />
         <Content padder style={defaultStyle.container}>
           <Card>
             <CardItem header bordered>
               <Text>
-                {weather.city_name}
-                {' '}
-                -
-                {' '}
-                {weather.date}
+                {String(weather.title).replace('Yahoo! Weather - ', '')}
+                {' - '}
+                {this.date(weather.item.forecast[0].date)}
               </Text>
             </CardItem>
 
             <CardItem>
               <Body style={defaultStyle.weather_title_container}>
                 <View style={defaultStyle.weather_title_sub_container}>
-                  <Image code={weather.condition_slug} time={weather.currently} />
+                  <Image code={weather.item.condition.code} />
                   <Text>
-                    {weather.description}
+                    {CONDITION[weather.item.condition.code]}
                   </Text>
                 </View>
 
@@ -75,7 +89,7 @@ class Weather extends React.Component {
                   <View style={defaultStyle.weather_temperature}>
                     <View style={{ flex: 1, justifyContent: 'flex-start', flexDirection: 'row' }}>
                       <Text style={defaultStyle.weather_title_text}>
-                        {weather.temp}
+                        {this.temperature(weather.item.condition.temp)}
                       </Text>
                       <Icon type="MaterialCommunityIcons" name="temperature-celsius" style={[defaultStyle.weather_icon, { marginTop: 15 }]} />
                     </View>
@@ -90,14 +104,14 @@ class Weather extends React.Component {
                   <View style={defaultStyle.weather_title_icons}>
                     <Icon name="arrow-up" style={defaultStyle.weather_temperature_icon} />
                     <Text style={defaultStyle.weather_title_text_max}>
-                      {weather.forecast[0].max}
+                      {this.temperature(weather.item.forecast[0].high)}
                     </Text>
                   </View>
 
                   <View style={defaultStyle.weather_title_icons}>
                     <Icon name="arrow-down" style={[defaultStyle.weather_temperature_icon, { color: '#77b9c8' }]} />
                     <Text style={defaultStyle.weather_title_text_min}>
-                      {weather.forecast[0].min}
+                      {this.temperature(weather.item.forecast[0].low)}
                     </Text>
                   </View>
                 </View>
@@ -114,7 +128,7 @@ class Weather extends React.Component {
                   </View>
                   <View style={defaultStyle.weather_container_icon}>
                     <Text style={defaultStyle.weather_text}>
-                      {weather.humidity}
+                      {weather.atmosphere.humidity}
                     </Text>
                     <Icon type="MaterialCommunityIcons" name="water-percent" style={defaultStyle.weather_icon} />
                   </View>
@@ -128,7 +142,7 @@ class Weather extends React.Component {
                   </View>
                   <View style={defaultStyle.weather_container_icon}>
                     <Text style={defaultStyle.weather_text}>
-                      {String(weather.wind_speedy).replace('km/h', '')}
+                      {this.velocity(weather.wind.speed)}
                     </Text>
                     <Icon type="MaterialCommunityIcons" name="weather-windy" style={defaultStyle.weather_icon} />
                   </View>
@@ -136,11 +150,11 @@ class Weather extends React.Component {
               </Body>
             </CardItem>
 
-            <CardItem footer bordered>
+            {/* <CardItem footer bordered>
               <Text>
                 {`${weather.date} às ${weather.time}`}
               </Text>
-            </CardItem>
+            </CardItem> */}
           </Card>
         </Content>
       </View>
