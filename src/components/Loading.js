@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   View,
   ActivityIndicator,
@@ -14,10 +15,29 @@ const style = StyleSheet.create({
   },
 });
 
-const Loading = () => (
-  <View style={style.container}>
-    <ActivityIndicator size={90} color="#FFFFFF" />
-  </View>
-);
+const Loading = (props) => {
+  const { transparent } = props;
+
+  if (transparent) {
+    return (
+      <View style={[style.container, { backgroundColor: 'transparent' }]}>
+        <ActivityIndicator size={50} color="#4682B4" />
+      </View>
+    );
+  }
+  return (
+    <View style={style.container}>
+      <ActivityIndicator size={90} color="#FFFFFF" />
+    </View>
+  );
+};
+
+Loading.propTypes = {
+  transparent: PropTypes.bool,
+};
+
+Loading.defaultProps = {
+  transparent: false,
+};
 
 export default Loading;

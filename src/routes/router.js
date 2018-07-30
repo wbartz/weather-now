@@ -2,12 +2,12 @@ import {
   createStackNavigator,
 } from 'react-navigation';
 
-import Cities from '../pages/Cities';
-import Weather from '../pages/Weather';
+import Cities from '@pages/Cities';
+import Weather from '@pages/Weather';
 
 const AppStack = createStackNavigator(
   {
-    City: Cities,
+    Cities,
     Weather,
   },
   {

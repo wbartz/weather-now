@@ -1,4 +1,4 @@
-import { WEATHER } from '../types';
+import { WEATHER } from '@types/types';
 import { CITY_URL } from '../env';
 
 function getWeather(woeid = 455823) {

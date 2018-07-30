@@ -1,15 +1,24 @@
 import React from 'react';
-import {
-  ListItem,
-  Text,
-} from 'native-base';
 import { NavigationActions, StackActions } from 'react-navigation';
-import { FlatList, AsyncStorage, View } from 'react-native';
-import Loading from './Loading';
+import {
+  FlatList,
+  AsyncStorage,
+  View,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
+import Loading from '@components/Loading';
 
 class CitiesList extends React.Component {
   renderItem = ({ item }) => (
-    <ListItem
+    <TouchableOpacity
+      style={{
+        height: 40,
+        justifyContent: 'center',
+        borderBottomWidth: 1,
+        borderBottomColor: '#4682B4',
+        paddingLeft: 10,
+      }}
       onPress={
         async () => {
           const { navigation } = this.props;
@@ -32,21 +41,16 @@ class CitiesList extends React.Component {
       <Text>
         {`${item.name} - ${item.admin1.content} - ${item.country.content}`}
       </Text>
-    </ListItem>
+    </TouchableOpacity>
   );
 
   render() {
     const { data, loading } = this.props;
 
-    if (loading) {
-      return (
-        <View style={{ marginTop: 10 }}>
-          <Loading />
-        </View>);
-    }
+    if (loading) return <Loading transparent />;
 
     return (
-      <View style={{ marginTop: 10 }}>
+      <View style={{ marginTop: 10, paddingLeft: 15, paddingRight: 15 }}>
         <FlatList
           data={data.place}
           renderItem={this.renderItem}

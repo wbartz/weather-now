@@ -1,4 +1,4 @@
-import { WEATHER } from '../types';
+import { WEATHER } from '@types/types';
 
 const initialState = {
   weather: [],

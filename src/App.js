@@ -1,12 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 import axiosMiddleware from 'redux-axios-middleware';
+import SplashScreen from 'react-native-splash-screen';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { Container } from 'native-base';
-
-import reducer from './reducers';
-import AppStack from './routes';
+import reducer from '@reducers/reducer';
+import AppStack from '@routes/router';
 
 const CLIENT = axios.create({
   responseType: 'json',
@@ -21,12 +20,18 @@ const STORE = createStore(
   ),
 );
 
-const App = () => (
-  <Provider store={STORE}>
-    <Container>
-      <AppStack />
-    </Container>
-  </Provider>
-);
+class App extends React.Component {
+  componentDidMount() {
+    SplashScreen.hide();
+  }
+
+  render() {
+    return (
+      <Provider store={STORE}>
+        <AppStack />
+      </Provider>
+    );
+  }
+}
 
 export default App;

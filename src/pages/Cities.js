@@ -4,24 +4,17 @@ import {
   connect,
 } from 'react-redux';
 import {
-  Content,
-  Form,
-  Item,
-  Label,
-  Input,
-  Button,
-  Text,
-} from 'native-base';
-import {
   View,
   Keyboard,
+  Button,
+  Text,
+  TextInput,
 } from 'react-native';
-import defaultStyle from '../assets';
 
-import { GetCity } from '../actions';
+import getCity from '@actions/City';
 
-import CitiesList from '../components/CitiesList';
-import CustomHeader from '../components/CustomHeader';
+import CitiesList from '@components/CitiesList';
+import defaultStyle from '@assets/styles';
 
 class Cities extends React.Component {
   constructor(props) {
@@ -39,33 +32,37 @@ class Cities extends React.Component {
 
   render() {
     const {
-      loading, cities, getCity, navigation,
+      loading,
+      cities,
+      getCity,
+      navigation,
     } = this.props;
     const { text } = this.state;
 
     return (
       <View style={{ flex: 1 }}>
-        <CustomHeader navigation={navigation} />
-        <Content padder style={defaultStyle.container}>
-          <Form>
-            <Item floatingLabel>
-              <Label>
-                Cidade
-              </Label>
-              <Input
-                style={defaultStyle.input}
-                onChangeText={
-                  text => this.onChangeText(text)
-                }
-                autoCapitalize="words"
-                blurOnSubmit
-                value={text}
-              />
-            </Item>
+        <View style={defaultStyle.header}>
+          <Text style={defaultStyle.header_text}>
+            Escolha sua cidade
+          </Text>
+        </View>
+
+        <View padder style={[defaultStyle.container, { paddingTop: 5 }]}>
+          <View style={{ padding: 15 }}>
+            <TextInput
+              style={defaultStyle.input}
+              placeholder="Cidade"
+              onChangeText={
+                text => this.onChangeText(text)
+              }
+              borderBottomWidth={1}
+              autoCapitalize="words"
+              blurOnSubmit
+              value={text}
+            />
 
             <Button
-              block
-              info
+              title="Buscar"
               style={defaultStyle.button}
               disabled={loading}
               onPress={
@@ -73,19 +70,15 @@ class Cities extends React.Component {
                   Keyboard.dismiss();
                   getCity(text);
                 }}
-            >
-              <Text>
-                Buscar
-              </Text>
-            </Button>
-          </Form>
+            />
+          </View>
 
           <CitiesList
             data={cities}
             loading={loading}
             navigation={navigation}
           />
-        </Content>
+        </View>
       </View>
     );
   }
@@ -105,7 +98,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  getCity: place => dispatch(GetCity(place)),
+  getCity: place => dispatch(getCity(place)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cities);

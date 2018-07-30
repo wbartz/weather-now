@@ -61,3 +61,13 @@ export const CONDITION = {
   47: 'Relâmpagos e chuvas isoladas', // isolated thundershowers
   3200: 'Não disponível', // not available
 };
+
+export const WEEK = {
+  Sun: 'Domingo',
+  Mon: 'Segunda',
+  Tue: 'Terça',
+  Wed: 'Quarta',
+  Thu: 'Quinta',
+  Fri: 'Sexta',
+  Sat: 'Sábado',
+};

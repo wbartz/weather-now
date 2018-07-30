@@ -7,16 +7,31 @@ const defaultStyle = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFFFF',
   },
+  header: {
+    height: 80,
+    backgroundColor: '#4682B4',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 10,
+  },
+  header_text: {
+    fontSize: 24,
+    color: '#FFFFFF',
+  },
   input: {
-    marginRight: 10,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: '#CCCCCC',
+    borderRadius: 5,
   },
   button: {
     marginTop: 10,
     marginLeft: 10,
     backgroundColor: '#77b9c8',
+    paddingLeft: 10,
   },
   weather_title_container: {
-    flex: 1,
+    flex: 0.3,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -32,9 +47,9 @@ const defaultStyle = StyleSheet.create({
     alignItems: 'center',
   },
   weather_temperature_icon: {
-    color: '#ff5722',
+    color: '#FF5722',
     fontSize: 22,
-    paddingTop: 8,
+    paddingTop: 12,
     paddingLeft: 10,
   },
   weather_title_text: {
@@ -50,16 +65,16 @@ const defaultStyle = StyleSheet.create({
   },
   weather_title_text_max: {
     fontSize: 20,
-    marginLeft: 10,
     paddingTop: 8,
+    color: '#FFFFFF',
   },
   weather_title_text_min: {
     fontSize: 20,
-    marginLeft: 13,
     paddingTop: 8,
+    color: '#FFFFFF',
   },
   weather_title_icons: {
-    flex: 0.5,
+    flex: 0.3,
     justifyContent: 'center',
     alignContent: 'center',
     flexDirection: 'row',
@@ -87,7 +102,23 @@ const defaultStyle = StyleSheet.create({
   },
   weather_icon: {
     fontSize: 20,
+    color: '#FFFFFF',
+  },
+  show_icon: {
+    fontSize: 35,
     color: '#77b9c8',
+  },
+  day_info: {
+    flex: 0.1,
+    backgroundColor: '#FFFFFF',
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: -30,
+    borderRadius: 5,
+  },
+  info: {
+    paddingLeft: 10,
+    paddingTop: 10,
   },
 });
 
