@@ -10,13 +10,13 @@ export const date = (data) => {
     day = `${'0'.repeat(1)}${String(day)}`;
   }
 
-  let month = date.getMonth() + 1;
+  let month = newDate.getMonth() + 1;
 
   if (month < 10) {
     month = `${'0'.repeat(1)}${String(month)}`;
   }
 
-  const year = date.getFullYear();
+  const year = newDate.getFullYear();
 
   const formated = `${day}/${month}/${year}`;
 

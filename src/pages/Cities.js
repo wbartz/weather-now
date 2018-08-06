@@ -56,6 +56,7 @@ class Cities extends React.Component {
                 text => this.onChangeText(text)
               }
               borderBottomWidth={1}
+              underlineColorAndroid="transparent"
               autoCapitalize="words"
               blurOnSubmit
               value={text}

@@ -38,8 +38,7 @@ class Weather extends React.Component {
     const { weather, loading, navigation } = this.props;
 
     if (loading) return <Loading />;
-    weather.item.forecast.shift();
-    console.log(Dimensions.get('window').width);
+
     return (
       <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
         <Header item={weather.item} title={weather.location.city} />

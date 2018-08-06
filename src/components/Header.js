@@ -9,10 +9,14 @@ import {
 import Icon from 'react-native-vector-icons/dist/MaterialCommunityIcons';
 import {
   temperature,
+  date,
 } from '@types/utils';
 import CustomImage from '@components/CustomImage';
 import defaultStyle from '@assets/styles';
-import { CONDITION } from '@types/types';
+import {
+  CONDITION,
+  WEEK,
+} from '@types/types';
 
 const styles = StyleSheet.create({
   container: {
@@ -27,6 +31,10 @@ const styles = StyleSheet.create({
   title: {
     flex: 0.2,
     fontSize: 30,
+    color: '#FFFFFF',
+  },
+  current_day: {
+    fontSize: 14,
     color: '#FFFFFF',
   },
   temp_container: {
@@ -60,6 +68,12 @@ const Header = (props) => {
         <Text style={styles.title}>
           {title}
         </Text>
+        <Text style={styles.current_day}>
+          {date(forecast.date)}
+          {' - '}
+          {WEEK[forecast.day]}
+        </Text>
+
         <View style={styles.temp_container}>
           <Text style={styles.temperature}>
             {temperature(item.condition.temp)}
